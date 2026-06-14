@@ -1,0 +1,260 @@
+[
+  {
+    "id": 1,
+    "orderNumber": "SS-2026-0001",
+    "customerName": "Покупатель Магазина",
+    "email": "client@sportmarket.ru",
+    "phone": "+7 999 100-20-30",
+    "deliveryAddress": "Санкт-Петербург, Невский проспект, 10",
+    "paymentMethod": "card",
+    "comment": "Позвонить за 30 минут",
+    "status": "paid",
+    "statusTitle": "Оплачен",
+    "items": [
+      {
+        "productId": 1,
+        "productName": "Кроссовки Sprint X",
+        "quantity": 1,
+        "unitPrice": 6490,
+        "totalPrice": 6490
+      },
+      {
+        "productId": 7,
+        "productName": "Бутылка Hydro Sprint",
+        "quantity": 1,
+        "unitPrice": 990,
+        "totalPrice": 990
+      }
+    ],
+    "totalAmount": 7480,
+    "createdAt": "2026-05-15T08:20:00.000Z",
+    "updatedAt": "2026-05-15T08:50:00.000Z"
+  },
+  {
+    "id": 2,
+    "orderNumber": "SS-2026-0002",
+    "customerName": "Мария Соколова",
+    "email": "maria.sokolova@sportmarket.ru",
+    "phone": "+7 999 555-44-33",
+    "deliveryAddress": "Санкт-Петербург, ул. Спортивная, 14",
+    "paymentMethod": "cash",
+    "comment": "",
+    "status": "processing",
+    "statusTitle": "В обработке",
+    "items": [
+      {
+        "productId": 2,
+        "productName": "Фитнес-коврик Core Mat",
+        "quantity": 1,
+        "unitPrice": 2190,
+        "totalPrice": 2190
+      },
+      {
+        "productId": 8,
+        "productName": "Эспандер Power Loop",
+        "quantity": 2,
+        "unitPrice": 1490,
+        "totalPrice": 2980
+      }
+    ],
+    "totalAmount": 5170,
+    "createdAt": "2026-05-15T10:05:00.000Z",
+    "updatedAt": "2026-05-15T10:20:00.000Z"
+  },
+  {
+    "id": 3,
+    "orderNumber": "SS-2026-0003",
+    "customerName": "Алексей Морозов",
+    "email": "alexey.morozov@sportmarket.ru",
+    "phone": "+7 911 321-44-20",
+    "deliveryAddress": "Санкт-Петербург, Московский проспект, 88",
+    "paymentMethod": "card",
+    "comment": "Доставка после 18:00",
+    "status": "new",
+    "statusTitle": "Новый",
+    "items": [
+      {
+        "productId": 3,
+        "productName": "Футбольный мяч Match Pro",
+        "quantity": 1,
+        "unitPrice": 2790,
+        "totalPrice": 2790
+      },
+      {
+        "productId": 16,
+        "productName": "Щитки Defender Lite",
+        "quantity": 1,
+        "unitPrice": 1590,
+        "totalPrice": 1590
+      }
+    ],
+    "totalAmount": 4380,
+    "createdAt": "2026-05-15T11:35:00.000Z",
+    "updatedAt": "2026-05-15T11:35:00.000Z"
+  },
+  {
+    "id": 4,
+    "orderNumber": "SS-2026-0004",
+    "customerName": "Екатерина Волкова",
+    "email": "ekaterina.volkova@sportmarket.ru",
+    "phone": "+7 921 777-16-45",
+    "deliveryAddress": "Санкт-Петербург, Лиговский проспект, 64",
+    "paymentMethod": "card",
+    "comment": "Передать заказ курьеру у подъезда",
+    "status": "shipped",
+    "statusTitle": "Передан в доставку",
+    "items": [
+      {
+        "productId": 4,
+        "productName": "Смарт-часы Pulse Track",
+        "quantity": 1,
+        "unitPrice": 8990,
+        "totalPrice": 8990
+      },
+      {
+        "productId": 11,
+        "productName": "Пояс Runner Belt",
+        "quantity": 1,
+        "unitPrice": 1790,
+        "totalPrice": 1790
+      }
+    ],
+    "totalAmount": 10780,
+    "createdAt": "2026-05-15T12:10:00.000Z",
+    "updatedAt": "2026-05-15T12:40:00.000Z"
+  },
+  {
+    "id": 5,
+    "orderNumber": "SS-2026-0005",
+    "customerName": "Покупатель Магазина",
+    "email": "client@sportmarket.ru",
+    "phone": "+7 999 210-30-40",
+    "deliveryAddress": "Махачкала, ул. Гамидова, 11",
+    "paymentMethod": "card",
+    "comment": "",
+    "status": "new",
+    "statusTitle": "Новый",
+    "items": [
+      {
+        "productId": 4,
+        "productName": "Смарт-часы Pulse Track",
+        "quantity": 1,
+        "unitPrice": 8990,
+        "totalPrice": 8990
+      },
+      {
+        "productId": 5,
+        "productName": "Набор гантелей Home Power",
+        "quantity": 1,
+        "unitPrice": 11990,
+        "totalPrice": 11990
+      }
+    ],
+    "totalAmount": 20980,
+    "createdAt": "2026-05-15T18:05:09.742Z",
+    "updatedAt": "2026-05-15T18:05:09.742Z"
+  },
+  {
+    "id": 6,
+    "orderNumber": "SS-2026-0006",
+    "customerName": "Администратор СпортМаркет",
+    "email": "admin@sportmarket.ru",
+    "phone": "+7 999 300-40-50",
+    "deliveryAddress": "Махачкала, пр. Имама Шамиля, 22",
+    "paymentMethod": "card",
+    "comment": "",
+    "status": "paid",
+    "statusTitle": "Оплачен",
+    "items": [
+      {
+        "productId": 6,
+        "productName": "Волейбольная форма Team Air",
+        "quantity": 1,
+        "unitPrice": 3890,
+        "totalPrice": 3890
+      }
+    ],
+    "totalAmount": 3890,
+    "createdAt": "2026-05-15T18:07:53.692Z",
+    "updatedAt": "2026-05-15T18:36:44.127Z"
+  },
+  {
+    "id": 7,
+    "orderNumber": "SS-2026-0007",
+    "customerName": "Покупатель Магазина",
+    "email": "client@sportmarket.ru",
+    "phone": "+7 999 123-45-67",
+    "deliveryAddress": "Махачкала, ул. Ирчи Казака, 12",
+    "paymentMethod": "card",
+    "comment": "Доставить после подтверждения заказа",
+    "status": "completed",
+    "statusTitle": "Завершен",
+    "items": [
+      {
+        "productId": 2,
+        "productName": "Фитнес-коврик Core Mat",
+        "quantity": 1,
+        "unitPrice": 2190,
+        "totalPrice": 2190
+      }
+    ],
+    "totalAmount": 2190,
+    "createdAt": "2026-05-17T18:34:24.653Z",
+    "updatedAt": "2026-05-24T15:29:42.695Z"
+  },
+  {
+    "id": 8,
+    "orderNumber": "SS-2026-0008",
+    "customerName": "Аиша Мисриева",
+    "email": "aishamisrieva4@gmail.com",
+    "phone": "9523965817",
+    "deliveryAddress": "Ленинский проспект дом 57 корпус 1 квартира 288",
+    "paymentMethod": "card",
+    "comment": "",
+    "status": "new",
+    "statusTitle": "Новый",
+    "items": [
+      {
+        "productId": 1,
+        "productName": "Кроссовки Nike Journey Run",
+        "quantity": 1,
+        "unitPrice": 17499,
+        "totalPrice": 17499
+      },
+      {
+        "productId": 7,
+        "productName": "Фляга Outventure, 0.7 л",
+        "quantity": 1,
+        "unitPrice": 899,
+        "totalPrice": 899
+      }
+    ],
+    "totalAmount": 18398,
+    "createdAt": "2026-06-09T11:33:52.875Z",
+    "updatedAt": "2026-06-09T11:33:52.875Z"
+  },
+  {
+    "id": 9,
+    "orderNumber": "SS-2026-0009",
+    "customerName": "Аиша Мисриева",
+    "email": "aishamisrieva4@gmail.com",
+    "phone": "9523965817",
+    "deliveryAddress": "Ленинский проспект дом 57 корпус один квартира 288",
+    "paymentMethod": "card",
+    "comment": "",
+    "status": "new",
+    "statusTitle": "Новый",
+    "items": [
+      {
+        "productId": 4,
+        "productName": "Спортивные часы COROS PACE 4 GPS",
+        "quantity": 1,
+        "unitPrice": 27999,
+        "totalPrice": 27999
+      }
+    ],
+    "totalAmount": 27999,
+    "createdAt": "2026-06-09T11:35:24.435Z",
+    "updatedAt": "2026-06-09T11:35:24.435Z"
+  }
+]

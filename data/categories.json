@@ -1,0 +1,20 @@
+[
+  {
+    "id": 1,
+    "name": "Бег",
+    "createdAt": "",
+    "updatedAt": ""
+  },
+  {
+    "id": 2,
+    "name": "Фитнес",
+    "createdAt": "",
+    "updatedAt": ""
+  },
+  {
+    "id": 3,
+    "name": "Командные виды",
+    "createdAt": "",
+    "updatedAt": ""
+  }
+]

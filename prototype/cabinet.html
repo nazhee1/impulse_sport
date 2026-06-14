@@ -1,0 +1,1244 @@
+﻿<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light" />
+    <meta
+      name="description"
+      content="Личный кабинет СпортМаркет для покупателя, менеджера и администратора интернет-магазина спортивных товаров."
+    />
+    <title>СпортМаркет | Личный кабинет</title>
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3C/svg%3E"
+    />
+    <script>
+      window.applyEarlySiteBrand = function (scope) {
+        try {
+          var settings = JSON.parse(localStorage.getItem("sportstore-design-settings-v1") || "null");
+          if (!settings) return;
+          var siteName = String(settings.siteName || "СпортМаркет").trim() || "СпортМаркет";
+          var siteSubtitle = String(settings.siteSubtitle || "Спортивные товары").trim();
+          var logoImage = String(settings.siteLogoImage || "").trim();
+          var root = scope || document;
+          root.querySelectorAll(".brand-title, .footer-brand strong").forEach(function (element) {
+            element.textContent = siteName;
+          });
+          root.querySelectorAll(".brand-subtitle").forEach(function (element) {
+            element.textContent = siteSubtitle;
+          });
+          root.querySelectorAll(".footer-brand p").forEach(function (element) {
+            element.textContent = siteSubtitle || "Спортивные товары для тренировок, игр и активного дня.";
+          });
+          root.querySelectorAll(".brand-badge, .footer-logo").forEach(function (element) {
+            element.classList.toggle("has-logo-image", Boolean(logoImage));
+            element.innerHTML = logoImage ? '<img src="' + logoImage + '" alt="" />' : "СМ";
+          });
+        } catch (error) {}
+      };
+      (function () {
+        try {
+          var raw = localStorage.getItem("sportstore-design-settings-v1");
+          if (!raw) return;
+          var settings = JSON.parse(raw);
+          var siteName = String(settings.siteName || "СпортМаркет").trim() || "СпортМаркет";
+          var siteLogoImage = String(settings.siteLogoImage || "").trim();
+          document.title = siteName + " | Личный кабинет";
+          if (siteLogoImage) {
+            var icon = document.querySelector('link[rel="icon"]');
+            if (icon) icon.href = siteLogoImage;
+          }
+          var defaults = { primaryColor: "#2d64b8", buttonColor: "#f0642f", buttonHoverColor: "#d94f21", backgroundColor: "#eef4fb", linkColor: "#2d64b8", footerColor: "#172335" };
+          var presets = {
+            green: { primaryColor: "#1f6f54", buttonColor: "#1f6f54", buttonHoverColor: "#18543f", backgroundColor: "#eef5ef", linkColor: "#1f6f54", footerColor: "#173d31" },
+            orange: { primaryColor: "#c65a20", buttonColor: "#e75b28", buttonHoverColor: "#c84f1f", backgroundColor: "#fff4ec", linkColor: "#c65a20", footerColor: "#3a241b" },
+            blue: { primaryColor: "#2d64b8", buttonColor: "#f0642f", buttonHoverColor: "#d94f21", backgroundColor: "#eef4fb", linkColor: "#2d64b8", footerColor: "#172335" },
+            dark: { primaryColor: "#2f8f6b", buttonColor: "#e75b28", buttonHoverColor: "#ff7848", backgroundColor: "#18231d", linkColor: "#8ed8b5", footerColor: "#101713" }
+          };
+          var preset = presets[settings.theme] || null;
+          if (preset) {
+            Object.keys(preset).forEach(function (key) {
+              if (!settings[key] || String(settings[key]).toLowerCase() === String(defaults[key] || "").toLowerCase()) settings[key] = preset[key];
+            });
+          }
+          var root = document.documentElement;
+          var fontStacks = {
+            Inter: 'Inter, "Segoe UI", Arial, sans-serif',
+            Arial: 'Arial, "Segoe UI", sans-serif',
+            Roboto: 'Roboto, "Segoe UI", Arial, sans-serif',
+            Montserrat: 'Montserrat, Arial, sans-serif',
+            system: 'system-ui, -apple-system, "Segoe UI", Arial, sans-serif'
+          };
+          var hexToRgb = function (value, fallback) {
+            var color = /^#[0-9a-f]{6}$/i.test(String(value || "")) ? String(value) : fallback;
+            var number = parseInt(color.slice(1), 16);
+            return [(number >> 16) & 255, (number >> 8) & 255, number & 255].join(", ");
+          };
+          var primary = settings.primaryColor || "#2d64b8";
+          var image = String(settings.siteBackgroundImage || "").trim();
+          var cardColor = hexToRgb(settings.cardColor, "#ffffff");
+          root.style.setProperty("--primary", primary);
+          root.style.setProperty("--secondary", primary);
+          root.style.setProperty("--button-color", settings.buttonColor || "#f0642f");
+          root.style.setProperty("--button-hover-color", settings.buttonHoverColor || "#d94f21");
+          root.style.setProperty("--heading-color", settings.headingColor || "#101713");
+          root.style.setProperty("--text-color", settings.textColor || "#151a17");
+          root.style.setProperty("--ink", settings.textColor || "#151a17");
+          root.style.setProperty("--bg", settings.backgroundColor || "#eef4fb");
+          root.style.setProperty("--surface", settings.cardColor || "#ffffff");
+          root.style.setProperty("--line", settings.borderColor || "#d6e1ee");
+          root.style.setProperty("--link-color", settings.linkColor || primary);
+          root.style.setProperty("--header-color", settings.headerColor || "#ffffff");
+          root.style.setProperty("--footer-color", settings.footerColor || "#172335");
+          root.style.setProperty("--font-main", fontStacks[settings.fontMain] || fontStacks.Arial);
+          root.style.setProperty("--font-heading", fontStacks[settings.fontHeading] || fontStacks.Arial);
+          root.style.setProperty("--base-font-size", Number(settings.baseFontSize || 15) + "px");
+          root.style.setProperty("--heading-font-size", Number(settings.headingFontSize || 42) + "px");
+          root.style.setProperty("--button-radius", (settings.buttonStyle === "round" ? 999 : settings.buttonStyle === "strict" ? 0 : Number(settings.buttonRadius || 8)) + "px");
+          root.style.setProperty("--button-padding", settings.buttonSize === "large" ? "14px 22px" : settings.buttonSize === "small" ? "8px 12px" : "10px 16px");
+          root.style.setProperty("--button-shadow", settings.buttonShadow === false ? "none" : "0 10px 18px rgba(23, 34, 28, 0.16)");
+          root.style.setProperty("--card-radius", Number(settings.cardRadius || 8) + "px");
+          root.style.setProperty("--card-shadow", settings.cardShadow === false ? "none" : "var(--shadow)");
+          root.style.setProperty("--card-bg-rgba", "rgba(" + cardColor + ", " + (Number(settings.cardOpacity || 96) / 100) + ")");
+          root.style.setProperty("--site-background-image-opacity", String(Number(settings.backgroundImageVisibility ?? 65) / 100));
+          root.style.setProperty("--site-background-overlay-color", settings.backgroundOverlayType === "dark" ? "0, 0, 0" : "255, 255, 255");
+          root.style.setProperty("--site-background-overlay-opacity", String(settings.backgroundOverlayType === "none" ? 0 : Number(settings.backgroundOverlayOpacity || 18) / 100));
+          if (image) {
+            root.style.setProperty("--site-background-image", 'url("' + image.replace(/"/g, "%22") + '")');
+            document.documentElement.classList.add("has-site-background");
+          }
+        } catch (error) {}
+      })();
+    </script>
+    <link rel="stylesheet" href="./styles.css?v=20260611-9" />
+  </head>
+  <body>
+    <div class="page-shell">
+      <header class="site-header">
+        <nav class="topbar" aria-label="Навигация кабинета">
+          <a class="brand" href="./index.html#catalog" aria-label="СпортМаркет">
+            <span class="brand-badge" aria-hidden="true">СМ</span>
+            <span class="brand-copy">
+              <strong class="brand-title">СпортМаркет</strong>
+              <span class="brand-subtitle">Спортивные товары</span>
+            </span>
+          </a>
+
+          <div class="topbar-actions">
+            <a href="./index.html#catalog" class="nav-link">Каталог</a>
+            <a href="./cabinet.html" class="nav-link">Кабинет</a>
+            <a href="./index.html" class="secondary-button">На главную</a>
+            <div id="cabinetUserBadge" class="user-badge" hidden>
+              <span id="cabinetUserRole">Роль</span>
+              <strong id="cabinetUserName">Пользователь</strong>
+              <button id="cabinetLogoutButton" class="icon-button logout-button" type="button" aria-label="Выйти">×</button>
+            </div>
+          </div>
+        </nav>
+      </header>
+      <script>window.applyEarlySiteBrand && window.applyEarlySiteBrand(document);</script>
+
+      <main>
+        <section class="hero cabinet-hero">
+          <div class="hero-copy">
+            <p id="cabinetRoleLabel" class="section-label">Личный кабинет</p>
+            <h1 id="cabinetTitle">Рабочее пространство магазина</h1>
+            <p id="cabinetLead" class="hero-text">
+              После входа на странице открывается кабинет, который соответствует роли пользователя: покупатель, менеджер
+              или администратор.
+            </p>
+          </div>
+
+          <aside class="hero-aside" aria-label="Сводка кабинета" hidden>
+            <div class="metric-card accent">
+              <span>Позиций каталога</span>
+              <strong id="cabinetMetricProducts">0</strong>
+            </div>
+            <div class="metric-card">
+              <span>Заказов в работе</span>
+              <strong id="cabinetMetricOrders">0</strong>
+            </div>
+            <div class="metric-card">
+              <span>Сумма заказов</span>
+              <strong id="cabinetMetricRevenue">0 ₽</strong>
+            </div>
+          </aside>
+        </section>
+
+        <section id="guestCabinetView" class="workspace-section">
+          <div class="section-heading workspace-heading">
+            <div>
+              <p class="section-label">Авторизация</p>
+              <h2>Вход в кабинет</h2>
+            </div>
+          </div>
+
+          <div class="cabinet-guest-grid">
+            <article class="panel-card profile-card">
+              <p class="section-label">Гостевой режим</p>
+              <h3>Каталог доступен без входа</h3>
+              <p class="helper-text">
+                Гость может просматривать товары и отдельные карточки. Для кабинета покупателя, рабочих зон менеджера и
+                администратора нужен вход по логину и паролю.
+              </p>
+              <div class="cabinet-actions">
+                <a href="./index.html#catalog" class="primary-button">Открыть каталог</a>
+              </div>
+            </article>
+
+            <article class="panel-card">
+              <p class="section-label">Вход по роли</p>
+              <h3>Авторизация пользователя</h3>
+              <form id="cabinetLoginForm" class="login-form">
+                <label class="field">
+                  <span>Логин</span>
+                  <input id="cabinetLoginInput" type="text" autocomplete="username" required />
+                </label>
+                <label class="field">
+                  <span>Пароль</span>
+                  <input id="cabinetPasswordInput" type="password" autocomplete="current-password" required />
+                </label>
+                <div id="cabinetRegisterFields" class="register-fields" hidden>
+                  <div class="field-row">
+                    <label class="field">
+                      <span>Имя</span>
+                      <input id="cabinetRegisterFirstName" type="text" autocomplete="given-name" />
+                    </label>
+                    <label class="field">
+                      <span>Фамилия</span>
+                      <input id="cabinetRegisterLastName" type="text" autocomplete="family-name" />
+                    </label>
+                  </div>
+                  <label class="field">
+                    <span>E-mail</span>
+                    <input id="cabinetRegisterEmail" type="email" autocomplete="email" />
+                  </label>
+                  <label class="field">
+                    <span>Телефон</span>
+                    <input id="cabinetRegisterPhone" type="tel" autocomplete="tel" />
+                  </label>
+                </div>
+                <button id="cabinetLoginSubmit" class="primary-button wide" type="submit">Войти в кабинет</button>
+                <button id="cabinetAuthModeToggleButton" class="ghost-button wide" type="button">
+                  Создать аккаунт покупателя
+                </button>
+              </form>
+            </article>
+          </div>
+        </section>
+
+        <section id="customerCabinetView" class="workspace-section" hidden>
+          <div class="section-heading workspace-heading">
+            <div>
+              <p class="section-label">Покупатель</p>
+              <h2>Личный кабинет</h2>
+            </div>
+          </div>
+
+          <div class="cabinet-role-layout">
+            <aside class="cabinet-side-nav">
+              <button class="side-nav-button is-active" type="button" data-role-tab="customer" data-tab="profile">Мои данные</button>
+              <button class="side-nav-button" type="button" data-role-tab="customer" data-tab="orders">Мои заказы</button>
+              <button class="side-nav-button" type="button" data-role-tab="customer" data-tab="addresses">Адреса доставки</button>
+              <button class="side-nav-button" type="button" data-role-tab="customer" data-tab="favorites">Избранное</button>
+              <button class="side-nav-button side-nav-logout" type="button" data-action="customer-logout">Выйти</button>
+            </aside>
+
+            <div class="cabinet-role-content">
+              <section id="customerTab-profile" class="role-tab-panel is-active">
+                <article class="panel-card customer-overview-card">
+                  <div class="summary-row">
+                    <div>
+                      <p class="section-label">Профиль</p>
+                      <h3 id="customerCabinetName">Покупатель</h3>
+                    </div>
+                    <span class="pill">Покупатель</span>
+                  </div>
+                  <p id="customerCabinetEmail" class="helper-text">client@sportmarket.ru</p>
+                  <div class="cabinet-metric-grid">
+                    <article class="cabinet-metric-card">
+                      <span>Заказы</span>
+                      <strong id="customerOrdersMetric">0</strong>
+                      <p>История покупок и повтор заказа.</p>
+                    </article>
+                    <article class="cabinet-metric-card">
+                      <span>Избранное</span>
+                      <strong id="customerFavoritesMetric">0</strong>
+                      <p>Товары, которые вы отложили.</p>
+                    </article>
+                    <article class="cabinet-metric-card">
+                      <span>В корзине</span>
+                      <strong id="customerCartMetric">0</strong>
+                      <p>Текущий состав заказа.</p>
+                    </article>
+                  </div>
+                </article>
+
+                <article class="panel-card profile-editor-card">
+                  <div class="summary-row">
+                    <div>
+                      <p class="section-label">Личная информация</p>
+                      <h3>Профиль покупателя</h3>
+                    </div>
+                  </div>
+                  <form id="customerProfileForm" class="profile-form">
+                    <div class="profile-form-section">
+                      <div class="profile-section-title">
+                        <h4>Личная информация</h4>
+                        <p>Эти данные используются для заказов и личного кабинета.</p>
+                      </div>
+                    <div class="field-row">
+                      <label class="field">
+                        <span>Имя</span>
+                        <input id="customerProfileFirstName" name="firstName" type="text" required />
+                      </label>
+                      <label class="field">
+                        <span>Фамилия</span>
+                        <input id="customerProfileLastName" name="lastName" type="text" required />
+                      </label>
+                    </div>
+                    <div class="field-row">
+                      <label class="field">
+                        <span>Дата рождения</span>
+                        <input id="customerProfileBirthDate" name="birthDate" type="date" />
+                      </label>
+                      <div class="field gender-field">
+                        <span>Пол</span>
+                        <div class="radio-row">
+                          <label><input type="radio" name="gender" value="male" /> Мужской</label>
+                          <label><input type="radio" name="gender" value="female" /> Женский</label>
+                        </div>
+                      </div>
+                    </div>
+                    </div>
+
+                    <div class="profile-form-section">
+                      <div class="profile-section-title">
+                        <h4>Адрес доставки</h4>
+                        <p id="customerAddressNotice" class="profile-info-note">Требуется обновить адрес</p>
+                      </div>
+                      <div class="field-row">
+                        <label class="field">
+                          <span>Город</span>
+                          <input id="customerProfileCity" name="city" type="text" />
+                        </label>
+                        <label class="field">
+                          <span>Улица</span>
+                          <input id="customerProfileStreet" name="street" type="text" />
+                        </label>
+                      </div>
+                      <div class="field-row">
+                        <label class="field">
+                          <span>Дом</span>
+                          <input id="customerProfileHouse" name="house" type="text" />
+                        </label>
+                        <label class="field">
+                          <span>Квартира</span>
+                          <input id="customerProfileApartment" name="apartment" type="text" />
+                        </label>
+                      </div>
+                    </div>
+
+                    <div class="profile-form-section">
+                      <div class="profile-section-title">
+                        <h4>Контакты</h4>
+                        <p>Телефон и почта нужны для подтверждения заказа.</p>
+                      </div>
+                      <div class="field-row">
+                        <label class="field">
+                          <span>Телефон</span>
+                          <input id="customerProfilePhone" name="phone" type="tel" />
+                          <small>Изменить</small>
+                        </label>
+                        <label class="field">
+                          <span>E-mail</span>
+                          <input id="customerProfileEmailDisplay" name="email" type="email" />
+                          <small id="customerEmailHint">Не указан · Добавить</small>
+                        </label>
+                      </div>
+                    </div>
+
+                    <div class="cabinet-actions">
+                      <button class="primary-button" type="submit">Сохранить данные</button>
+                      <a href="./index.html#catalog" class="ghost-button">Вернуться в каталог</a>
+                    </div>
+                  </form>
+                </article>
+
+                <article class="panel-card quick-kit-card">
+                  <div class="summary-row">
+                    <div>
+                      <p class="section-label">Быстрый набор</p>
+                      <h3>Собрать заказ к тренировке</h3>
+                    </div>
+                    <button id="customerQuickKitButton" class="secondary-button" type="button">Добавить набор в корзину</button>
+                  </div>
+                  <div id="customerQuickKitList" class="kit-list"></div>
+                </article>
+              </section>
+
+              <section id="customerTab-orders" class="role-tab-panel" hidden>
+                <article class="panel-card customer-orders-card">
+                  <div class="summary-row">
+                    <div>
+                      <p class="section-label">Заказы</p>
+                      <h3>История покупок</h3>
+                    </div>
+                    <span class="pill" id="customerOrdersCountPill">0 заказов</span>
+                  </div>
+                  <div id="customerOrderHistory" class="history-list"></div>
+                </article>
+              </section>
+
+              <section id="customerTab-favorites" class="role-tab-panel" hidden>
+                <article class="panel-card favorites-card">
+                  <div class="summary-row">
+                    <div>
+                      <p class="section-label">Избранное</p>
+                      <h3>Товары на потом</h3>
+                    </div>
+                    <span class="pill" id="customerFavoritesCount">0 товаров</span>
+                  </div>
+                  <div id="customerFavoritesList" class="favorites-list"></div>
+                </article>
+              </section>
+
+              <section id="customerTab-addresses" class="role-tab-panel" hidden>
+                <article class="panel-card profile-editor-card">
+                  <div class="summary-row">
+                    <div>
+                      <p class="section-label">Доставка</p>
+                      <h3>Адрес доставки</h3>
+                    </div>
+                  </div>
+                  <form id="customerAddressForm" class="profile-form">
+                    <div class="profile-form-section">
+                      <div class="field-row">
+                        <label class="field">
+                          <span>Город</span>
+                          <input id="customerAddressCity" name="city" type="text" />
+                        </label>
+                        <label class="field">
+                          <span>Улица</span>
+                          <input id="customerAddressStreet" name="street" type="text" />
+                        </label>
+                      </div>
+                      <div class="field-row">
+                        <label class="field">
+                          <span>Дом</span>
+                          <input id="customerAddressHouse" name="house" type="text" />
+                        </label>
+                        <label class="field">
+                          <span>Квартира</span>
+                          <input id="customerAddressApartment" name="apartment" type="text" />
+                        </label>
+                      </div>
+                    </div>
+                    <div class="cabinet-actions">
+                      <button class="primary-button" type="submit">Сохранить адрес</button>
+                    </div>
+                  </form>
+                </article>
+
+              </section>
+            </div>
+          </div>
+        </section>
+
+        <section id="managerCabinetView" class="workspace-section" hidden>
+          <div class="section-heading workspace-heading">
+            <div>
+              <p class="section-label">Менеджер</p>
+              <h2>Рабочий кабинет менеджера</h2>
+            </div>
+          </div>
+
+          <div class="cabinet-role-layout">
+            <aside class="cabinet-side-nav">
+              <button class="side-nav-button is-active" type="button" data-role-tab="manager" data-tab="profile">Профиль</button>
+              <button class="side-nav-button" type="button" data-role-tab="manager" data-tab="orders">Заказы</button>
+              <button class="side-nav-button" type="button" data-role-tab="manager" data-tab="stock">Остатки</button>
+              <button class="side-nav-button" type="button" data-role-tab="manager" data-tab="promocodes">Промокоды</button>
+            </aside>
+
+            <div class="cabinet-role-content">
+              <section id="managerTab-profile" class="role-tab-panel is-active">
+                <article class="panel-card manager-overview-card">
+                  <div class="summary-row">
+                    <div>
+                      <p class="section-label">Смена</p>
+                      <h3 id="managerCabinetName">Рабочая панель менеджера</h3>
+                    </div>
+                    <span class="pill">Оперативная смена</span>
+                  </div>
+                  <div class="cabinet-metric-grid">
+                    <article class="cabinet-metric-card">
+                      <span>Активные заказы</span>
+                      <strong id="managerActiveMetric">0</strong>
+                      <p>Все заказы, которые ещё не завершены.</p>
+                    </article>
+                    <article class="cabinet-metric-card">
+                      <span>Новые</span>
+                      <strong id="managerNewMetric">0</strong>
+                      <p>Заявки, ожидающие обработки.</p>
+                    </article>
+                    <article class="cabinet-metric-card">
+                      <span>Низкие остатки</span>
+                      <strong id="managerStockMetric">0</strong>
+                      <p>Позиции, которые скоро закончатся.</p>
+                    </article>
+                  </div>
+                </article>
+
+                <article class="panel-card">
+                  <div class="summary-row">
+                    <div>
+                      <p class="section-label">Личные данные</p>
+                      <h3>Профиль сотрудника</h3>
+                    </div>
+                  </div>
+                  <form id="managerProfileForm" class="profile-form">
+                    <div class="field-row">
+                      <label class="field">
+                        <span>Имя</span>
+                        <input id="managerProfileFirstName" name="firstName" type="text" required />
+                      </label>
+                      <label class="field">
+                        <span>Фамилия</span>
+                        <input id="managerProfileLastName" name="lastName" type="text" required />
+                      </label>
+                    </div>
+                    <div class="field-row">
+                      <label class="field">
+                        <span>Телефон</span>
+                        <input id="managerProfilePhone" name="phone" type="tel" />
+                      </label>
+                      <label class="field">
+                        <span>Дата рождения</span>
+                        <input id="managerProfileBirthDate" name="birthDate" type="date" />
+                      </label>
+                    </div>
+                    <div class="field-row">
+                      <label class="field">
+                        <span>Пол</span>
+                        <select id="managerProfileGender" name="gender">
+                          <option value="">Не указан</option>
+                          <option value="male">Мужской</option>
+                          <option value="female">Женский</option>
+                        </select>
+                      </label>
+                      <label class="field">
+                        <span>E-mail</span>
+                        <input id="managerProfileEmailDisplay" type="email" disabled />
+                      </label>
+                    </div>
+                    <div class="field-row">
+                      <label class="field">
+                        <span>Город</span>
+                        <input id="managerProfileCity" name="city" type="text" />
+                      </label>
+                      <label class="field">
+                        <span>Улица</span>
+                        <input id="managerProfileStreet" name="street" type="text" />
+                      </label>
+                    </div>
+                    <div class="field-row">
+                      <label class="field">
+                        <span>Дом</span>
+                        <input id="managerProfileHouse" name="house" type="text" />
+                      </label>
+                    </div>
+                    <div class="cabinet-actions">
+                      <button class="primary-button" type="submit">Сохранить данные</button>
+                    </div>
+                  </form>
+                </article>
+
+              </section>
+
+              <section id="managerTab-orders" class="role-tab-panel" hidden>
+                <article class="panel-card">
+                  <div class="summary-row">
+                    <div>
+                      <p class="section-label">Заказы</p>
+                      <h3>Обработка заказов</h3>
+                    </div>
+                    <span class="pill" id="managerOrdersCount">0 заказов</span>
+                  </div>
+                  <div id="managerOrdersList" class="order-list"></div>
+                </article>
+              </section>
+
+              <section id="managerTab-stock" class="role-tab-panel" hidden>
+                <article class="panel-card">
+                  <div class="summary-row">
+                    <div>
+                      <p class="section-label">Склад</p>
+                      <h3>Остатки и пополнение</h3>
+                    </div>
+                    <span class="pill" id="managerStockCount">0 позиций</span>
+                  </div>
+                  <div id="managerStockList" class="stock-list"></div>
+                </article>
+              </section>
+
+              <section id="managerTab-promocodes" class="role-tab-panel" hidden>
+                <article class="panel-card promo-manager-card">
+                  <div class="summary-row">
+                    <div>
+                      <p class="section-label">Промокоды</p>
+                      <h3>Скидки на товары</h3>
+                    </div>
+                    <span class="pill">Создание скидок</span>
+                  </div>
+                  <div id="managerPromoCodesPanel" class="promo-admin-panel"></div>
+                </article>
+              </section>
+            </div>
+          </div>
+        </section>
+
+        <section id="adminCabinetView" class="workspace-section" hidden>
+          <div class="section-heading workspace-heading">
+            <div>
+              <p class="section-label">Администратор</p>
+              <h2>Админ-панель магазина</h2>
+            </div>
+          </div>
+
+          <div class="cabinet-role-layout admin-role-layout">
+            <aside class="cabinet-side-nav">
+              <button class="side-nav-button is-active" type="button" data-role-tab="admin" data-tab="profile">Профиль</button>
+              <button class="side-nav-button" type="button" data-role-tab="admin" data-tab="dashboard">Аналитика</button>
+              <button class="side-nav-button" type="button" data-role-tab="admin" data-tab="design">Дизайн сайта</button>
+              <button class="side-nav-button" type="button" data-role-tab="admin" data-tab="orders">Заказы</button>
+              <button class="side-nav-button" type="button" data-role-tab="admin" data-tab="catalog">Каталог</button>
+              <button class="side-nav-button" type="button" data-role-tab="admin" data-tab="promocodes">Промокоды</button>
+              <button class="side-nav-button" type="button" data-role-tab="admin" data-tab="users">Пользователи</button>
+            </aside>
+
+            <div class="cabinet-role-content">
+              <section id="adminTab-profile" class="role-tab-panel is-active">
+                <article class="panel-card admin-overview-card">
+                  <div class="summary-row">
+                    <div>
+                      <p class="section-label">Управление магазином</p>
+                      <h3 id="adminCabinetName">Центр управления</h3>
+                    </div>
+                    <span class="pill">Полный доступ</span>
+                  </div>
+                  <div class="cabinet-metric-grid admin-cabinet-grid">
+                    <article class="cabinet-metric-card">
+                      <span>Товары</span>
+                      <strong id="adminProductsMetric">0</strong>
+                      <p>Все позиции каталога.</p>
+                    </article>
+                    <article class="cabinet-metric-card">
+                      <span>Заказы</span>
+                      <strong id="adminOrdersMetric">0</strong>
+                      <p>Сохранённые заказы магазина.</p>
+                    </article>
+                    <article class="cabinet-metric-card">
+                      <span>Низкие остатки</span>
+                      <strong id="adminLowStockMetric">0</strong>
+                      <p>Товары, которым нужно пополнение.</p>
+                    </article>
+                    <article class="cabinet-metric-card">
+                      <span>Оборот</span>
+                      <strong id="adminRevenueMetric">0 ₽</strong>
+                      <p>Сумма сохранённых заказов.</p>
+                    </article>
+                  </div>
+                </article>
+
+                <article class="panel-card">
+                  <div class="summary-row">
+                    <div>
+                      <p class="section-label">Личные данные</p>
+                      <h3>Профиль администратора</h3>
+                    </div>
+                  </div>
+                  <form id="adminProfileForm" class="profile-form">
+                    <div class="field-row">
+                      <label class="field">
+                        <span>Имя</span>
+                        <input id="adminProfileFirstName" name="firstName" type="text" required />
+                      </label>
+                      <label class="field">
+                        <span>Фамилия</span>
+                        <input id="adminProfileLastName" name="lastName" type="text" required />
+                      </label>
+                    </div>
+                    <div class="field-row">
+                      <label class="field">
+                        <span>Телефон</span>
+                        <input id="adminProfilePhone" name="phone" type="tel" />
+                      </label>
+                      <label class="field">
+                        <span>Дата рождения</span>
+                        <input id="adminProfileBirthDate" name="birthDate" type="date" />
+                      </label>
+                    </div>
+                    <div class="field-row">
+                      <label class="field">
+                        <span>Пол</span>
+                        <select id="adminProfileGender" name="gender">
+                          <option value="">Не указан</option>
+                          <option value="male">Мужской</option>
+                          <option value="female">Женский</option>
+                        </select>
+                      </label>
+                      <label class="field">
+                        <span>E-mail</span>
+                        <input id="adminProfileEmailDisplay" type="email" disabled />
+                      </label>
+                    </div>
+                    <div class="field-row">
+                      <label class="field">
+                        <span>Город</span>
+                        <input id="adminProfileCity" name="city" type="text" />
+                      </label>
+                      <label class="field">
+                        <span>Улица</span>
+                        <input id="adminProfileStreet" name="street" type="text" />
+                      </label>
+                    </div>
+                    <div class="field-row">
+                      <label class="field">
+                        <span>Дом</span>
+                        <input id="adminProfileHouse" name="house" type="text" />
+                      </label>
+                    </div>
+                    <div class="cabinet-actions">
+                      <button class="primary-button" type="submit">Сохранить данные</button>
+                    </div>
+                  </form>
+                </article>
+              </section>
+
+              <section id="adminTab-dashboard" class="role-tab-panel" hidden>
+                <section class="panel-card admin-dashboard-card">
+                  <div class="summary-row">
+                    <div>
+                      <p class="section-label">Аналитика</p>
+                      <h3>Дашборд магазина</h3>
+                    </div>
+                  </div>
+                  <div id="cabinetAdminInsights" class="admin-analytics"></div>
+                </section>
+              </section>
+
+              <section id="adminTab-design" class="role-tab-panel" hidden>
+                <section class="panel-card admin-dashboard-card">
+                  <div class="summary-row">
+                    <div>
+                      <p class="section-label">Внешний вид</p>
+                      <h3>Дизайн сайта</h3>
+                    </div>
+                    <div class="table-actions">
+                      <button id="resetDesignButton" class="ghost-button" type="button">Сбросить дизайн</button>
+                    </div>
+                  </div>
+                  <form id="designSettingsForm" class="design-settings-form">
+                    <section id="designPreview" class="design-preview">
+                      <div class="design-preview-background">
+                        <img id="designBackgroundPreview" src="" alt="Предпросмотр фонового изображения" hidden />
+                      </div>
+                      <div class="design-preview-card">
+                        <p class="section-label">Предпросмотр</p>
+                        <h4>Заголовок страницы</h4>
+                        <p>Обычный текст карточки: описание товара, условия заказа и рабочие элементы интерфейса.</p>
+                        <button class="primary-button" type="button">Пример кнопки</button>
+                        <div class="design-preview-product">
+                          <span class="product-tag">Категория</span>
+                          <strong>Карточка товара</strong>
+                          <small>Цена, остаток и кнопки выглядят в выбранной теме.</small>
+                        </div>
+                      </div>
+                    </section>
+
+                    <section class="design-settings-grid">
+                      <article class="design-settings-group">
+                        <h4>Название и картинка сайта</h4>
+                        <div class="site-brand-editor">
+                          <div class="site-brand-preview">
+                            <span class="brand-badge" data-site-logo-preview>СМ</span>
+                            <div class="brand-copy">
+                              <strong class="brand-title">СпортМаркет</strong>
+                              <span class="brand-subtitle">Спортивные товары</span>
+                            </div>
+                          </div>
+                          <div class="field-row">
+                            <label class="field">
+                              <span>Название сайта</span>
+                              <input name="siteName" type="text" maxlength="40" />
+                            </label>
+                            <label class="field">
+                              <span>Подпись</span>
+                              <input name="siteSubtitle" type="text" maxlength="60" />
+                            </label>
+                          </div>
+                          <label class="field">
+                            <span>Картинка сайта</span>
+                            <input id="siteLogoFile" type="file" accept=".jpg,.jpeg,.png,.webp,.svg,image/jpeg,image/png,image/webp,image/svg+xml" />
+                            </label>
+                          <div class="cabinet-actions">
+                            <button id="removeSiteLogoButton" class="ghost-button" type="button">Сбросить фото</button>
+                          </div>
+                        </div>
+                      </article>
+
+                      <article class="design-settings-group">
+                        <h4>Готовая тема</h4>
+                        <label class="field">
+                          <span>Тема</span>
+                          <select id="designThemeSelect" name="theme">
+                            <option value="light">Стандартная светлая</option>
+                            <option value="dark">Темная</option>
+                            <option value="green">Спортивная зеленая</option>
+                            <option value="orange">Оранжевая</option>
+                            <option value="blue">Синяя</option>
+                          </select>
+                        </label>
+                      </article>
+
+                      <article class="design-settings-group">
+                        <h4>Цвета</h4>
+                        <div class="design-color-grid">
+                          <label class="field"><span>Основной</span><input name="primaryColor" type="color" /></label>
+                          <label class="field"><span>Кнопки</span><input name="buttonColor" type="color" /></label>
+                          <label class="field"><span>Наведение</span><input name="buttonHoverColor" type="color" /></label>
+                          <label class="field"><span>Заголовки</span><input name="headingColor" type="color" /></label>
+                          <label class="field"><span>Текст</span><input name="textColor" type="color" /></label>
+                          <label class="field"><span>Фон</span><input name="backgroundColor" type="color" /></label>
+                          <label class="field"><span>Карточки</span><input name="cardColor" type="color" /></label>
+                          <label class="field"><span>Рамки</span><input name="borderColor" type="color" /></label>
+                          <label class="field"><span>Ссылки</span><input name="linkColor" type="color" /></label>
+                          <label class="field"><span>Шапка</span><input name="headerColor" type="color" /></label>
+                          <label class="field"><span>Футер</span><input name="footerColor" type="color" /></label>
+                        </div>
+                      </article>
+
+                      <article class="design-settings-group">
+                        <h4>Шрифты</h4>
+                        <div class="field-row">
+                          <label class="field">
+                            <span>Основной шрифт</span>
+                            <select name="fontMain">
+                              <option value="Inter">Inter</option>
+                              <option value="Arial">Arial</option>
+                              <option value="Roboto">Roboto</option>
+                              <option value="Montserrat">Montserrat</option>
+                              <option value="system">System default</option>
+                            </select>
+                          </label>
+                          <label class="field">
+                            <span>Шрифт заголовков</span>
+                            <select name="fontHeading">
+                              <option value="Inter">Inter</option>
+                              <option value="Arial">Arial</option>
+                              <option value="Roboto">Roboto</option>
+                              <option value="Montserrat">Montserrat</option>
+                              <option value="system">System default</option>
+                            </select>
+                          </label>
+                        </div>
+                        <div class="field-row">
+                          <label class="field"><span>Размер текста</span><input name="baseFontSize" type="number" min="13" max="18" /></label>
+                          <label class="field"><span>Размер заголовков</span><input name="headingFontSize" type="number" min="26" max="52" /></label>
+                        </div>
+                      </article>
+
+                      <article class="design-settings-group">
+                        <h4>Кнопки и карточки</h4>
+                        <div class="field-row">
+                          <label class="field"><span>Скругление кнопок</span><input name="buttonRadius" type="number" min="0" max="28" /></label>
+                          <label class="field">
+                            <span>Размер кнопок</span>
+                            <select name="buttonSize">
+                              <option value="small">Компактные</option>
+                              <option value="normal">Обычные</option>
+                              <option value="large">Крупные</option>
+                            </select>
+                          </label>
+                          <label class="field">
+                            <span>Стиль кнопок</span>
+                            <select name="buttonStyle">
+                              <option value="normal">Обычные</option>
+                              <option value="round">Круглые</option>
+                              <option value="strict">Строгие</option>
+                            </select>
+                          </label>
+                        </div>
+                        <div class="field-row">
+                          <label class="field"><span>Скругление карточек</span><input name="cardRadius" type="number" min="0" max="24" /></label>
+                          <label class="field"><span>Прозрачность карточек</span><input name="cardOpacity" type="range" min="72" max="100" /></label>
+                        </div>
+                        <label class="checkbox-row"><input name="buttonShadow" type="checkbox" /> Тень у кнопок</label>
+                        <label class="checkbox-row"><input name="cardShadow" type="checkbox" /> Тень у карточек</label>
+                      </article>
+
+                      <article class="design-settings-group">
+                        <h4>Фон сайта</h4>
+                        <label class="field"><span>Фоновое фото</span><input id="designBackgroundFile" type="file" accept=".jpg,.jpeg,.png,.webp,image/jpeg,image/png,image/webp" /></label>
+                        <div class="field-row">
+                          <label class="field"><span>Видимость фото</span><input name="backgroundImageVisibility" type="range" min="0" max="100" /></label>
+                          <label class="field">
+                            <span>Слой поверх фона</span>
+                            <select name="backgroundOverlayType">
+                              <option value="none">Без слоя</option>
+                              <option value="light">Светлый слой</option>
+                              <option value="dark">Темный слой</option>
+                            </select>
+                          </label>
+                          <label class="field"><span>Прозрачность слоя</span><input name="backgroundOverlayOpacity" type="range" min="0" max="100" /></label>
+                        </div>
+                        <div class="cabinet-actions">
+                          <button id="removeDesignBackgroundButton" class="ghost-button" type="button">Убрать фоновое изображение</button>
+                        </div>
+                      </article>
+                    </section>
+
+                    <div class="cabinet-actions">
+                      <button class="primary-button" type="submit">Сохранить дизайн</button>
+                    </div>
+                  </form>
+
+                  <section class="design-slider-section">
+                    <div class="summary-row">
+                      <div>
+                        <p class="section-label">Главная страница</p>
+                        <h3>Слайдер главной страницы</h3>
+                      </div>
+                      <div class="table-actions">
+                        <button id="cabinetAddSlideButton" class="ghost-button" type="button">Добавить слайд</button>
+                        <button id="cabinetSlidesSaveButton" class="primary-button" type="button">Сохранить слайдер</button>
+                      </div>
+                    </div>
+                    <p class="helper-text">
+                      Здесь можно менять текст, тег, порядок, картинку и видимость промо-блоков на главной странице.
+                    </p>
+                    <div class="site-background-manager" hidden>
+                      <div class="site-background-preview">
+                        <img id="cabinetBackgroundPreview" src="" alt="Фото заднего плана сайта" hidden />
+                        <span id="cabinetBackgroundEmpty">Фон не выбран</span>
+                      </div>
+                      <div class="site-background-fields">
+                        <p class="section-label">Задний план сайта</p>
+                        <h4>Фоновое фото</h4>
+                        <label class="field">
+                          <span>Загрузить фото</span>
+                          <input id="cabinetBackgroundImageFile" type="file" accept=".jpg,.jpeg,.png,.webp,image/jpeg,image/png,image/webp" />
+                        </label>
+                        <div class="cabinet-actions">
+                          <button id="cabinetBackgroundSaveButton" class="primary-button" type="button">Сохранить фон</button>
+                          <button id="cabinetClearBackgroundButton" class="ghost-button" type="button">Убрать фон</button>
+                        </div>
+                      </div>
+                    </div>
+                    <div id="cabinetSlidesList" class="admin-slides-list"></div>
+                  </section>
+                </section>
+              </section>
+
+              <section id="adminTab-orders" class="role-tab-panel" hidden>
+                <article class="panel-card admin-orders-card">
+                  <div class="summary-row">
+                    <div>
+                      <p class="section-label">Заказы</p>
+                      <h3>Все заказы</h3>
+                    </div>
+                    <span class="pill" id="adminOrdersCountPill">0 записей</span>
+                  </div>
+                  <div class="admin-catalog-toolbar">
+                    <label class="field search-field">
+                      <span>Поиск заказа</span>
+                      <input id="cabinetAdminOrderSearch" type="search" placeholder="Номер, клиент, email, статус" autocomplete="off" />
+                    </label>
+                  </div>
+                  <div id="cabinetAdminOrdersList" class="order-list"></div>
+                </article>
+              </section>
+
+              <section id="adminTab-catalog" class="role-tab-panel" hidden>
+                <article class="panel-card catalog-card">
+                  <div class="summary-row">
+                    <div>
+                      <p class="section-label">Каталог</p>
+                      <h3>Товары и остатки</h3>
+                    </div>
+                    <div class="table-actions">
+                      <button id="cabinetAddProductButton" class="primary-button" type="button">Добавить товар</button>
+                      <span class="pill" id="adminProductsCountPill">0 товаров</span>
+                    </div>
+                  </div>
+                  <div class="admin-catalog-toolbar">
+                    <label class="field search-field">
+                      <span>Поиск товара</span>
+                      <input id="cabinetAdminProductSearch" type="search" placeholder="SKU, название, бренд, категория" autocomplete="off" />
+                    </label>
+                  </div>
+                  <div class="admin-category-manager" hidden>
+                    <form id="adminCategoryForm" class="admin-category-form">
+                      <label class="field">
+                        <span>Новая категория</span>
+                        <input id="adminCategoryName" type="text" placeholder="Например, Туризм" required />
+                      </label>
+                      <button id="adminCategorySubmitButton" class="secondary-button" type="submit">Добавить категорию</button>
+                    </form>
+                    <div class="admin-category-summary">
+                      <span class="section-label">Категории каталога</span>
+                      <div id="adminCategoriesList" class="category-pill-list"></div>
+                    </div>
+                  </div>
+                  <div id="cabinetAdminCatalog" class="catalog-table"></div>
+                </article>
+              </section>
+
+              <section id="adminTab-promocodes" class="role-tab-panel" hidden>
+                <article class="panel-card promo-manager-card">
+                  <div class="summary-row">
+                    <div>
+                      <p class="section-label">Промокоды</p>
+                      <h3>Скидки на товары</h3>
+                    </div>
+                    <span class="pill">Администратор</span>
+                  </div>
+                  <div id="adminPromoCodesPanel" class="promo-admin-panel"></div>
+                </article>
+              </section>
+
+              <section id="adminTab-users" class="role-tab-panel" hidden>
+                <article class="panel-card">
+                  <div class="summary-row">
+                    <div>
+                      <p class="section-label">Пользователи и роли</p>
+                      <h3>Пользователи магазина</h3>
+                    </div>
+                    <span class="pill" id="adminUsersCountPill">0 пользователей</span>
+                  </div>
+                  <div class="admin-users-layout">
+                    <div class="admin-users-list-card">
+                      <div class="admin-catalog-toolbar">
+                        <label class="field search-field">
+                          <span>Поиск пользователя</span>
+                          <input id="cabinetAdminUserSearch" type="search" placeholder="Логин, имя, email, роль" autocomplete="off" />
+                        </label>
+                      </div>
+                      <div id="cabinetAdminUsersList" class="catalog-table"></div>
+                    </div>
+
+                    <form id="adminUserForm" class="panel-card staff-form">
+                      <div class="summary-row">
+                        <div>
+                          <p class="section-label">Учетная запись</p>
+                          <h3 id="adminUserEditorTitle">Новый сотрудник</h3>
+                        </div>
+                      </div>
+                      <input id="adminUserId" type="hidden" />
+                      <div class="field-row">
+                        <label class="field">
+                          <span>Имя</span>
+                          <input id="adminUserFirstName" name="firstName" type="text" required />
+                        </label>
+                        <label class="field">
+                          <span>Фамилия</span>
+                          <input id="adminUserLastName" name="lastName" type="text" required />
+                        </label>
+                      </div>
+                      <div class="field-row">
+                        <label class="field">
+                          <span>Логин</span>
+                          <input id="adminUserLogin" name="login" type="text" required />
+                        </label>
+                        <label class="field">
+                          <span>Пароль</span>
+                          <input id="adminUserPassword" name="password" type="text" placeholder="Оставьте пустым при редактировании" />
+                        </label>
+                      </div>
+                      <div class="field-row">
+                        <label class="field">
+                          <span>Роль</span>
+                          <select id="adminUserRole" name="role">
+                            <option value="customer">Покупатель</option>
+                            <option value="manager">Менеджер</option>
+                            <option value="admin">Администратор</option>
+                          </select>
+                        </label>
+                        <label class="field">
+                          <span>E-mail</span>
+                          <input id="adminUserEmail" name="email" type="email" required />
+                        </label>
+                      </div>
+                      <div class="field-row">
+                        <label class="field field-wide">
+                          <span>Телефон</span>
+                          <input id="adminUserPhone" name="phone" type="tel" />
+                        </label>
+                      </div>
+                      <input id="adminUserIsActive" name="isActive" type="checkbox" checked hidden />
+                      <div class="cabinet-actions">
+                        <button id="adminUserSaveButton" class="primary-button" type="submit">Сохранить пользователя</button>
+                        <button id="adminUserResetButton" class="ghost-button" type="button">Новая запись</button>
+                      </div>
+                    </form>
+                  </div>
+                </article>
+              </section>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <footer class="site-footer">
+        <div class="footer-inner">
+          <div class="footer-brand">
+            <span class="footer-logo" aria-hidden="true">СМ</span>
+            <div>
+              <strong>СпортМаркет</strong>
+              <p>Спортивные товары для тренировок, игр и активного дня.</p>
+            </div>
+          </div>
+          <nav class="footer-links" aria-label="Навигация в футере">
+            <a href="./index.html#catalog">Каталог</a>
+            <a href="./cabinet.html">Личный кабинет</a>
+            <a href="./index.html#catalog">Товары</a>
+          </nav>
+          <div class="footer-meta">
+            <span>2026</span>
+            <strong>Мисриев Нажмудин Альбертович</strong>
+            <span>Группа 05-23.ИСИП.ОФ.11</span>
+          </div>
+        </div>
+      </footer>
+      <script>window.applyEarlySiteBrand && window.applyEarlySiteBrand(document);</script>
+
+      <div id="cabinetProductEditorModal" class="modal" hidden>
+        <div id="cabinetProductEditorBackdrop" class="modal-backdrop"></div>
+        <div class="modal-card editor-card" role="dialog" aria-modal="true" aria-labelledby="cabinetProductEditorTitle">
+          <div class="summary-row modal-heading">
+            <div>
+              <p class="section-label">Админ</p>
+              <h2 id="cabinetProductEditorTitle">Новый товар</h2>
+            </div>
+            <button id="cabinetCloseProductEditorButton" class="icon-button" aria-label="Закрыть редактор">×</button>
+          </div>
+
+          <form id="cabinetProductEditorForm" class="login-form">
+            <input id="cabinetEditorProductId" type="hidden" />
+            <div class="field-row">
+              <label class="field">
+                <span>Название</span>
+                <input id="cabinetEditorName" type="text" required />
+              </label>
+              <label class="field">
+                <span>Бренд</span>
+                <select id="cabinetEditorBrand" required></select>
+                <input id="cabinetEditorNewBrand" type="text" placeholder="Новый бренд" hidden />
+              </label>
+            </div>
+
+            <div class="field-row">
+              <label class="field">
+                <span>Категория</span>
+                <select id="cabinetEditorCategory">
+                  <option value="Бег">Бег</option>
+                  <option value="Фитнес">Фитнес</option>
+                  <option value="Командные виды">Командные виды</option>
+                </select>
+                <div class="inline-category-creator">
+                  <input id="cabinetNewCategoryName" type="text" placeholder="Новая категория" />
+                  <button id="cabinetCreateCategoryButton" class="ghost-button" type="button">Добавить</button>
+                </div>
+              </label>
+              <label class="field">
+                <span>Рейтинг</span>
+                <input id="cabinetEditorRating" type="number" min="0" max="5" step="0.1" required />
+              </label>
+            </div>
+
+
+            <div class="field-row">
+              <label class="field">
+                <span>Пол товара</span>
+                <select id="cabinetEditorGender">
+                  <option value="unisex">Унисекс</option>
+                  <option value="male">Мужской</option>
+                  <option value="female">Женский</option>
+                </select>
+              </label>
+              <label class="field">
+                <span>Размеры</span>
+                <input id="cabinetEditorSizes" type="text" placeholder="Например: 38, 39, 40, 41" />
+                <small class="helper-text">Можно указать несколько размеров через запятую.</small>
+              </label>
+            </div>
+
+            <div class="field-row">
+              <label class="field">
+                <span>Цена</span>
+                <input id="cabinetEditorPrice" type="number" min="0" required />
+              </label>
+              <label class="field">
+                <span>Старая цена</span>
+                <input id="cabinetEditorOldPrice" type="number" min="0" />
+              </label>
+            </div>
+
+            <div class="field-row">
+              <label class="field">
+                <span>Остаток</span>
+                <input id="cabinetEditorStock" type="number" min="0" required />
+              </label>
+              <label class="field checkbox-field">
+                <span>Статус</span>
+                <span class="checkbox-row">
+                  <input id="cabinetEditorIsActive" type="checkbox" checked />
+                  Показывать в каталоге
+                </span>
+              </label>
+            </div>
+
+            <div class="editor-media-block">
+              <label class="field">
+                <span>Добавить фото товара</span>
+                <input id="cabinetEditorImageFile" type="file" accept="image/*" multiple />
+                </label>
+              <div class="editor-image-preview">
+                <img id="cabinetEditorImagePreview" src="" alt="Превью товара" hidden />
+                <button id="cabinetClearEditorImageButton" class="ghost-button" type="button" hidden>Убрать все фото</button>
+              </div>
+            </div>
+
+            <label class="field">
+              <span>Краткое описание</span>
+              <textarea id="cabinetEditorDescription" rows="4" required></textarea>
+            </label>
+
+            <label class="field">
+              <span>Подробности</span>
+              <textarea id="cabinetEditorDetails" rows="4" required></textarea>
+            </label>
+
+            <div class="editor-actions">
+              <button id="cabinetDeleteProductButton" class="ghost-button danger-button" type="button" hidden>Удалить товар</button>
+              <button id="cabinetSaveProductButton" class="primary-button" type="submit">Добавить товар</button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <div id="cabinetToast" class="toast" aria-live="polite"></div>
+    </div>
+
+    <script src="./cabinet.js?v=20260614-promocodes-1"></script>
+  </body>
+</html>
+
+
+
+
+
+
+

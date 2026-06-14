@@ -1,0 +1,13 @@
+{
+  "name": "sportstore-diploma",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Дипломный проект интернет-магазина спортивных товаров.",
+  "scripts": {
+    "start": "node --preserve-symlinks --preserve-symlinks-main server.js",
+    "test": "node --preserve-symlinks --preserve-symlinks-main tests/api.test.js"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

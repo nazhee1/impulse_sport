@@ -1,0 +1,13 @@
+[
+  {
+    "id": 1,
+    "code": "123",
+    "productId": 0,
+    "productName": "Все товары",
+    "discountPercent": 90,
+    "isActive": true,
+    "createdBy": "Администратор Магазина",
+    "createdAt": "2026-06-14T12:13:02.492Z",
+    "updatedAt": "2026-06-14T12:13:02.492Z"
+  }
+]
