@@ -63,7 +63,7 @@ const state = {
   slides: [],
   settings: {
     siteBackgroundImage: "",
-    siteName: "СпортМаркет",
+    siteName: "Импульс Спорт",
     siteSubtitle: "Спортивные товары",
     siteLogoImage: "",
     backgroundImageVisibility: 65,
@@ -2603,7 +2603,7 @@ function persistDesignSettings(settings) {
 }
 
 function applySiteBrand(settings = state.settings) {
-  const siteName = String(settings?.siteName || "СпортМаркет").trim() || "СпортМаркет";
+  const siteName = String(settings?.siteName || "Импульс Спорт").trim() || "Импульс Спорт";
   const siteSubtitle = String(settings?.siteSubtitle || "Спортивные товары").trim();
   const logoImage = String(settings?.siteLogoImage || "").trim();
 
@@ -2615,7 +2615,7 @@ function applySiteBrand(settings = state.settings) {
   });
   document.querySelectorAll(".brand-badge, [data-site-logo-preview]").forEach((element) => {
     element.classList.toggle("has-logo-image", Boolean(logoImage));
-    element.innerHTML = logoImage ? `<img src="${logoImage}" alt="" />` : "СМ";
+    element.innerHTML = logoImage ? `<img src="${logoImage}" alt="" />` : "ИС";
   });
   document.querySelectorAll(".footer-brand strong").forEach((element) => {
     element.textContent = siteName;
@@ -2625,7 +2625,7 @@ function applySiteBrand(settings = state.settings) {
   });
   document.querySelectorAll(".footer-logo").forEach((element) => {
     element.classList.toggle("has-logo-image", Boolean(logoImage));
-    element.innerHTML = logoImage ? `<img src="${logoImage}" alt="" />` : "СМ";
+    element.innerHTML = logoImage ? `<img src="${logoImage}" alt="" />` : "ИС";
   });
   updateSiteFaviconAndTitle(siteName, logoImage);
 }

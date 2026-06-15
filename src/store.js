@@ -1,4 +1,4 @@
-﻿const crypto = require("node:crypto");
+const crypto = require("node:crypto");
 const fs = require("node:fs");
 const path = require("node:path");
 
@@ -214,7 +214,7 @@ function saveCategories(dataDir, categories) {
 function getDefaultSettings() {
   return {
     siteBackgroundImage: "",
-    siteName: "СпортМаркет",
+    siteName: "Импульс Спорт",
     siteSubtitle: "Спортивные товары",
     siteLogoImage: "",
     backgroundImageVisibility: 65,

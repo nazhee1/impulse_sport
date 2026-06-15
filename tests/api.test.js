@@ -175,7 +175,7 @@ test("GET /api/products returns filtered products", async (t) => {
 
   assert.equal(response.status, 200);
   assert.equal(payload.total, 1);
-  assert.equal(payload.items[0].name, "Фитнес-коврик Core Mat");
+  assert.equal(payload.items[0].name, "Коврик для фитнеса Demix");
 });
 
 test("GET /api/products respects category and price together", async (t) => {
@@ -188,7 +188,7 @@ test("GET /api/products respects category and price together", async (t) => {
   assert.equal(payload.total, 2);
   assert.deepEqual(
     payload.items.map((product) => product.name),
-    ["Перчатки Grip Pro", "Эспандер Power Loop"]
+    ["Перчатки для фитнеса KETTLER", "Эспандер кистевой KETTLER, 55 кг"]
   );
 });
 
@@ -231,7 +231,7 @@ test("POST /api/orders creates order and reduces stock", async (t) => {
 
   assert.equal(orderResponse.status, 201);
   assert.equal(orderPayload.customerName, "Тестовый Пользователь");
-  assert.equal(orderPayload.totalAmount, 4380);
+  assert.equal(orderPayload.totalAmount, 3180);
   assert.equal(productResponse.status, 200);
   assert.equal(productPayload.stock, beforeProduct.stock - 2);
 });
@@ -388,7 +388,7 @@ test("DELETE /api/admin/products/:id removes product from catalog", async (t) =>
 
   assert.equal(deleteResponse.status, 200);
   assert.equal(deletePayload.id, 18);
-  assert.equal(productsPayload.total, 17);
+  assert.equal(productsPayload.total, 19);
   assert.equal(productsPayload.items.some((product) => product.id === 18), false);
 });
 
@@ -419,11 +419,11 @@ test("POST /api/admin/products creates product in catalog", async (t) => {
   const { payload: productsPayload } = await getJson(`${baseUrl}/api/products`);
 
   assert.equal(createResponse.status, 201);
-  assert.equal(createPayload.id, 19);
-  assert.equal(createPayload.sku, "FIT-019");
+  assert.equal(createPayload.id, 21);
+  assert.equal(createPayload.sku, "FIT-021");
   assert.match(createPayload.image, /^data:image\/svg\+xml/);
-  assert.equal(productsPayload.total, 19);
-  assert.equal(productsPayload.items.some((product) => product.id === 19), true);
+  assert.equal(productsPayload.total, 21);
+  assert.equal(productsPayload.items.some((product) => product.id === 21), true);
 });
 
 test("admin can create category and use it in catalog", async (t) => {
